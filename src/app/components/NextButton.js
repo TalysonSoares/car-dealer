@@ -1,18 +1,21 @@
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function NextButton({ selectedMake, selectedYear }) {
-  const isButtonEnabled = selectedMake && selectedYear;
+  const router = useRouter();
+
+  const handleClick = () => {
+    if (selectedMake && selectedYear) {
+      router.push(`/result/${selectedMake}/${selectedYear}`);
+    }
+  };
 
   return (
-    <Link href={isButtonEnabled ? `/result/${selectedMake}/${selectedYear}` : '#'}>
-      <button
-        className={`px-4 py-2 rounded text-white ${
-          isButtonEnabled ? 'bg-blue-500 hover:bg-blue-600' : 'bg-gray-400 cursor-not-allowed'
-        }`}
-        disabled={!isButtonEnabled}
-      >
-        Next
-      </button>
-    </Link>
+    <button
+      onClick={handleClick}
+      disabled={!selectedMake || !selectedYear}
+      className="p-2 mt-4 bg-blue-500 text-white rounded disabled:bg-gray-300"
+    >
+      Next
+    </button>
   );
 }
