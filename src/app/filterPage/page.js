@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from 'react';
 import MakeSelector from '../components/MakeSelector';
@@ -13,7 +13,7 @@ export default function VehicleFilterPage() {
   useEffect(() => {
     async function fetchMakes() {
       const response = await fetch(
-        'https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/car?format=json'
+        `${process.env.NEXT_PUBLIC_API_URL}/GetMakesForVehicleType/car?format=json`,
       );
       const data = await response.json();
       setMakes(data.Results || []);
@@ -25,9 +25,16 @@ export default function VehicleFilterPage() {
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
       <h1 className="text-2xl font-bold mb-4">Car Dealer App</h1>
       <div className="flex flex-col space-y-4">
-        <MakeSelector makes={makes} selectedMake={selectedMake} setSelectedMake={setSelectedMake} />
+        <MakeSelector
+          makes={makes}
+          selectedMake={selectedMake}
+          setSelectedMake={setSelectedMake}
+        />
 
-        <YearSelector selectedYear={selectedYear} setSelectedYear={setSelectedYear} />
+        <YearSelector
+          selectedYear={selectedYear}
+          setSelectedYear={setSelectedYear}
+        />
 
         <NextButton selectedMake={selectedMake} selectedYear={selectedYear} />
       </div>
