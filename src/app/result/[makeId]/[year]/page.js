@@ -33,15 +33,18 @@ export default function ResultPage() {
     }
   }, [makeId, year]);
 
-  if (error) return <div className="text-center text-red-500">{error}</div>;
+  if (error)
+    return <div className="text-center text-red-600 text-lg mt-4">{error}</div>;
 
   return (
-    <div className="min-h-screen p-8 bg-gray-100">
-      <h1 className="text-2xl font-bold mb-4">Available Models for {year}</h1>
+    <div className="mmin-h-screen bg-gray-50 py-8 px-4">
+      <h1 className="text-3xl font-semibold text-gray-800 text-center mb-6">
+        Available Models for <span className="text-indigo-600">{year}</span>
+      </h1>
       {loading ? (
         <div className="flex items-center justify-center space-x-2 mt-4">
           <svg
-            className="animate-spin h-5 w-5 text-indigo-500"
+            className="animate-spin h-8 w-8 text-indigo-500"
             viewBox="0 0 24 24"
           >
             <circle
@@ -53,15 +56,20 @@ export default function ResultPage() {
               fill="none"
             />
           </svg>
-          <span className="text-indigo-500">Loading models...</span>
+          <span className="text-lg text-indigo-600">Loading models...</span>
         </div>
       ) : models.length > 0 ? (
-        <Suspense fallback={<div>Loading models...</div>}>
-          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <Suspense
+          fallback={
+            <div className="text-center text-indigo-500">Loading models...</div>
+          }
+        >
+          <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-8">
             {models.map((model, index) => (
               <CarCard
                 key={`${model.Model_ID}-${index}`}
                 modelName={model.Model_Name}
+                className="transition transform hover:scale-105 hover:shadow-lg"
               />
             ))}
           </div>
