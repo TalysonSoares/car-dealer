@@ -1,4 +1,7 @@
 export default function MakeSelector({ makes, selectedMake, setSelectedMake }) {
+    // Ordena os fabricantes em ordem alfabética por MakeName
+    const sortedMakes = [...makes].sort((a, b) => a.MakeName.localeCompare(b.MakeName));
+  
     return (
       <div>
         <label htmlFor="make" className="block text-gray-700 mb-2">
@@ -11,7 +14,7 @@ export default function MakeSelector({ makes, selectedMake, setSelectedMake }) {
           onChange={(e) => setSelectedMake(e.target.value)}
         >
           <option value="">Select a make</option>
-          {makes.map((make) => (
+          {sortedMakes.map((make) => (
             <option key={make.MakeId} value={make.MakeId}>
               {make.MakeName}
             </option>

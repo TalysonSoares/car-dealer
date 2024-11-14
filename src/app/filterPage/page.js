@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import MakeSelector from './MakeSelector';
-import YearSelector from './YearSelector';
-import NextButton from './NextButton';
+import MakeSelector from '../components/MakeSelector';
+import YearSelector from '../components/YearSelector';
+import NextButton from '../components/NextButton';
 
 export default function VehicleFilterPage() {
   const [makes, setMakes] = useState([]);
